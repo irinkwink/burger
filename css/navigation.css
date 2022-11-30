@@ -10,6 +10,7 @@
 .navigation__list {
   display: flex;
   padding: 0 calc(100vw / 2 - var(--container) / 2);
+  flex-wrap: wrap;
   gap: 8px;
   overflow-x: auto;
 }
