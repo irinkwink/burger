@@ -7,10 +7,11 @@ import {
   ingredientsList,
   ingredientsCalories,
   modalProductPriceCount,
+  modalProductBtn,
 } from "./elements.js";
 import { getData } from "./getData.js";
 
-export const openModal = async(id) => {
+export const openModal = async (id) => {
   const product = await getData(`${API_URL}${PREFIX_PRODUCT}/${id}`);
 
   modalProductTitle.textContent = product.title;
@@ -18,6 +19,7 @@ export const openModal = async(id) => {
   modalProductDescription.textContent = product.description;
   ingredientsCalories.textContent = `${product.weight}г, ккал ${product.calories}`;
   modalProductPriceCount.textContent = product.price;
+  modalProductBtn.dataset.id = product.id;
 
   ingredientsList.innerHTML = '';
 

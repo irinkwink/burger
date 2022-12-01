@@ -4,16 +4,12 @@ import { catalogList } from "./elements.js";
 import { getData } from "./getData.js"
 
 export const renderListProduct = async(category) => {
-  const data = await getData(`${API_URL}${PREFIX_PRODUCT}`);
+  const data = await getData(`${API_URL}${PREFIX_PRODUCT}${category ? `?category=${category}` : ``}`);
   console.log('data: ', data);
   
   catalogList.textContent = '';
 
-  const cardsData = category
-    ? data.filter((item) => item.category === category)
-    : data;
-
-  const cards = cardsData.map(creatCardProduct);
+  const cards = data.map(creatCardProduct);
 
   catalogList.append(...cards);
 }
