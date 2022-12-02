@@ -1,6 +1,8 @@
+import { closeModal } from "./closeModal.js";
 import { API_URL, PREFIX_PRODUCT } from "./const.js";
-import { catalogList, countAmount, modalProductBtn, orderCount, orderList, orderTotalAmount } from "./elements.js";
+import { catalogList, countAmount, modalDelivery, modalProductBtn, order, orderCount, orderList, orderSubmit, orderTotalAmount, orderWrapTitle } from "./elements.js";
 import { getData } from "./getData.js";
+import { orderController } from "./orderController.js";
 
 const getCart = () => {
   const cartList = localStorage.getItem('burger-cart');
@@ -24,9 +26,9 @@ const createCartItem = (product, cartList) => {
     </div>
 
     <div class="order__product-count count">
-      <button class="count__minus">-</button>
+      <button class="count__minus" data-id="${product.id}">-</button>
       <p class="count__amount">${count}</p>
-      <button class="count__plus">+</button>
+      <button class="count__plus" data-id="${product.id}">+</button>
     </div>
   `
 
@@ -37,18 +39,23 @@ const renderCartList = async () => {
   const cartList = getCart();
   console.log('cartList: ', cartList);
 
+  orderSubmit.disabled = !cartList.length;
+
   const allIdProduct = cartList.map((item) => item.id);
 
-  const data = await getData(`${API_URL}${PREFIX_PRODUCT}?list=${allIdProduct}`);
-  console.log('Cartdata: ', data);
+  const data = cartList.length
+    ? await getData(`${API_URL}${PREFIX_PRODUCT}?list=${allIdProduct}`)
+    : [];
 
   const countProduct = cartList.reduce((acc, item) => acc + item.count, 0);
   orderCount.textContent = countProduct;
 
   const totalAmount = cartList.reduce((acc, item) => {
     const price = data.find((product) => item.id === product.id).price;
-    return acc += price * item.count;
+    return acc + (price * item.count);
   }, 0)
+
+  console.log('Cartdata: ', data);
 
   orderTotalAmount.textContent = totalAmount;
 
@@ -90,6 +97,11 @@ const removeCart = (id) => {
   updateCartList(cartList);
 };
 
+const clearCart = () => {
+  localStorage.removeItem('burger-cart');
+  renderCartList();
+};
+
 const cartController = () => {
   catalogList.addEventListener('click', ({target}) => {
     if (target.closest('.product__add')) {
@@ -115,9 +127,21 @@ const cartController = () => {
       return
     }
   })
+
+  orderWrapTitle.addEventListener('click', () => {
+      order.classList.toggle('order_open')
+  });
+
+  orderSubmit.addEventListener('click', () => {
+    modalDelivery.classList.add('modal_open')
+    document.addEventListener('keydown', closeModal);
+  })
+
+  modalDelivery.addEventListener('click', closeModal)
 };
 
 export const cartInit = () => {
   cartController();
   renderCartList();
+  orderController(getCart, clearCart);
 }

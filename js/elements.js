@@ -14,6 +14,15 @@ export const navigationList = document.querySelector('.navigation__list');
 export const navigationListItems = navigationList.querySelectorAll('.navigation__button');
 export const catalogTitle = document.querySelector('.catalog__title');
 
-export const orderCount = document.querySelector('.order__count');
-export const orderList = document.querySelector('.order__list');
-export const orderTotalAmount = document.querySelector('.order__total-amount');
+export const order = document.querySelector('.order');
+export const orderCount = order.querySelector('.order__count');
+export const orderList = order.querySelector('.order__list');
+export const orderTotalAmount = order.querySelector('.order__total-amount');
+export const orderWrapTitle = order.querySelector('.order__wrap-title');
+export const orderSubmit = order.querySelector('.order__submit');
+
+export const modalDelivery = document.querySelector('.modal_delivery');
+export const modalDeliveryForm = modalDelivery.querySelector('.modal-delivery__form');
+
+export const modalOrderConfirm = document.querySelector('.modal_order-confirm');
+export const modalOrderConfirmTextContainer = modalOrderConfirm.querySelector('.modal-order-confirm__text-container');

@@ -4,6 +4,7 @@
 
 .order__wrapper {
   position: absolute;
+  z-index: 10;
   top: 0;
   left: 0;
   right: 0;
@@ -15,6 +16,7 @@
 }
 
 .order__wrap-title {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,6 +27,10 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 100%;
+}
+
+.order__wrap-title:hover .order__title {
+  color: #FFAB08;
 }
 
 .order__count {
@@ -121,6 +127,7 @@
 }
 
 .order__submit:disabled {
+  cursor: no-drop;
   background-color: #F9F9F9;
   color: #ACACAC;
 }
@@ -149,6 +156,7 @@
   }
 
   .order__wrapper {
+
     position: unset;
     width: 300px;
     padding: 24px 16px;
@@ -158,13 +166,16 @@
     display: block;
   }
 
-
-
   .order__wrap-title {
+    cursor: default;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
+  }
+
+  .order__wrap-title:hover .order__title {
+    color: inherit;
   }
 
   .order__title {

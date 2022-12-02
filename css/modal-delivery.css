@@ -8,7 +8,6 @@
   flex-direction: column;
   margin: 0 auto;
   height: 100%;
-  
 }
 
 .modal-delivery__title {
@@ -28,6 +27,10 @@
   flex-wrap: wrap;
   gap: var(--gap);
   margin-bottom: 24px;
+}
+
+.modal-delivery__fieldset-input_hide {
+  visibility: hidden;
 }
 
 .modal-delivery__fieldset-input:last-child {

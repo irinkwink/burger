@@ -1,16 +1,9 @@
 import { cartInit } from "./cart.js";
+import { closeModal } from "./closeModal.js";
 import { catalogList, modalProduct, modalProductBtn} from "./elements.js";
 import { navigationListController } from "./navigationListController.js";
 import { openModal } from "./openModal.js";
 import { renderListProduct } from "./renderListProduct.js";
-
-
-const closeModal = (e) => {
-  if (e.target.closest('.modal__close') || e.target === modalProduct || e.key === 'Escape') {
-    document.removeEventListener('keydown', closeModal);
-    modalProduct.classList.remove('modal_open');
-  }
-}
 
 catalogList.addEventListener('click', (e) => {
   const target = e.target;
